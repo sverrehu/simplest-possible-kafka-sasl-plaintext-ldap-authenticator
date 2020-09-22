@@ -20,7 +20,10 @@ Configuration is done using Kafka properties: Either
 environment variables, capitalize every letter of the original property,
 replace dots with underscores, and prefix with `KAFKA_`.
 
-During development I use Confluent's cp-all-in-one-community as my Kafka environment, so all examples will use environment variables as found in the `docker-compose.yml`-file.
+During development I use Confluent's
+[cp-all-in-one-community demo](https://github.com/confluentinc/cp-all-in-one/tree/5.5.1-post/cp-all-in-one-community)
+for my Kafka environment, so all examples will use environment variables
+as found in the `docker-compose.yml`-file.
 
 ### Kafka integration
 

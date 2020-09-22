@@ -4,39 +4,14 @@ objectClass: top
 objectClass: organizationalUnit
 ou: People
 
-dn: cn=John Doe,ou=People,{{ LDAP_BASE_DN }}
+dn: cn=testuser,ou=People,{{ LDAP_BASE_DN }}
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
-cn: John Doe
-sn: Doe
-telexNumber: asd456
-uid: jd
-
-dn: cn=sverrehu,ou=People,{{ LDAP_BASE_DN }}
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: sverre
-sn: Huseby
-description: Sverre H.
-  Huseby
-telexNumber: abc123
-uid: sverrehu
+cn: testuser
+uid: testuser
+sn: testuser
+description: Test User
 userPassword: {SSHA}Vv7mSEzM74BvtLiErS7RzF/vsSWPpGzB
-
-dn: ou=Groups,{{ LDAP_BASE_DN }}
-objectClass: organizationalUnit
-objectClass: top
-ou: Groups
-
-dn: cn=Group1,ou=Groups,{{ LDAP_BASE_DN }}
-objectClass: groupOfNames
-objectClass: top
-cn: Group1
-member: uid=sverrehu
-member: uid=jd
-member: cn=sverre,ou=People,{{ LDAP_BASE_DN }}
 
