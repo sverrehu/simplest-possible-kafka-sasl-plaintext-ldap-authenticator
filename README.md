@@ -127,3 +127,19 @@ with logs:
 ```
 [2020-09-22 12:50:54,731] INFO [SocketServer brokerId=1] Failed authentication with /172.27.0.1 (Unexpected Kafka request of type METADATA during SASL handshake.) (org.apache.kafka.common.network.Selector)
 ```
+
+## Misc. notes
+
+* Since all this is based on plain-text passwords, you will want to
+  run it over SSL/TLS.
+* This is SASL_PLAIN, meaning that both the Kafka broker and the
+  application the user wants to use will get access to the user's
+  password before passing it on to the directory server where the
+  authentication is taking place. In many environments this is
+  considered not acceptable: Look for something like OAUTH or SAML
+  instead.
+* There is no caching of the authentication result, but it is trivial to
+  implement if needed. If you do, please do not use the plain-text
+  password as part of the cache key, but pass it through a hashing
+  function first.
+
