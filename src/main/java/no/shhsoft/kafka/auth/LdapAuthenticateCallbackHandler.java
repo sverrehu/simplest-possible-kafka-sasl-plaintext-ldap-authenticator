@@ -1,9 +1,8 @@
 package no.shhsoft.kafka.auth;
 
-import no.shhsoft.ldap.LdapUsernamePasswordAuthenticator;
 import no.shhsoft.ldap.LdapConnectionSpec;
+import no.shhsoft.ldap.LdapUsernamePasswordAuthenticator;
 import no.shhsoft.security.UsernamePasswordAuthenticator;
-import no.shhsoft.validation.Validate;
 import org.apache.kafka.common.security.auth.AuthenticateCallbackHandler;
 import org.apache.kafka.common.security.plain.PlainAuthenticateCallback;
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.AppConfigurationEntry;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:shh@thathost.com">Sverre H. Huseby</a>
@@ -42,7 +42,7 @@ implements AuthenticateCallbackHandler {
     }
 
     public LdapAuthenticateCallbackHandler(final UsernamePasswordAuthenticatorFactory usernamePasswordAuthenticatorFactory) {
-        this.usernamePasswordAuthenticatorFactory = Validate.notNull(usernamePasswordAuthenticatorFactory);
+        this.usernamePasswordAuthenticatorFactory = Objects.requireNonNull(usernamePasswordAuthenticatorFactory);
     }
 
     @Override

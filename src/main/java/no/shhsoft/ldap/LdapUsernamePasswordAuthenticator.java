@@ -2,7 +2,6 @@ package no.shhsoft.ldap;
 
 import no.shhsoft.security.UsernamePasswordAuthenticator;
 import no.shhsoft.utils.StringUtils;
-import no.shhsoft.validation.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +11,7 @@ import javax.naming.NamingException;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 import java.util.Hashtable;
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:shh@thathost.com">Sverre H. Huseby</a>
@@ -25,8 +25,8 @@ implements UsernamePasswordAuthenticator {
     private final String usernameToDnFormat;
 
     public LdapUsernamePasswordAuthenticator(final LdapConnectionSpec ldapConnectionSpec, final String usernameToDnFormat) {
-        this.ldapConnectionSpec = Validate.notNull(ldapConnectionSpec);
-        this.usernameToDnFormat = Validate.notNull(usernameToDnFormat);
+        this.ldapConnectionSpec = Objects.requireNonNull(ldapConnectionSpec);
+        this.usernameToDnFormat = Objects.requireNonNull(usernameToDnFormat);
     }
 
     @Override
