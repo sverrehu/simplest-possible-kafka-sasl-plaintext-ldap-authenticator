@@ -2,7 +2,7 @@ package no.shhsoft.ldap;
 
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.testcontainers.containers.GenericContainer;
+import org.zapodot.junit.ldap.EmbeddedLdapRule;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,34 +13,34 @@ import static org.junit.Assert.assertTrue;
 public final class LdapUsernamePasswordAuthenticatorIntegrationTest {
 
     @ClassRule
-    public static final GenericContainer<?> LDAP_CONTAINER = LdapContainerUtils.createContainer();
+    public static final EmbeddedLdapRule LDAP_RULE = EmbeddedLdapUtils.createEmbeddedLdapRule();
 
     @Test
     public void shouldAcceptValidUserDnAndPassword() {
         final LdapUsernamePasswordAuthenticator authenticator = getAuthenticator();
-        assertTrue(authenticator.authenticateByDn(LdapContainerUtils.LDAP_ADMIN_DN, LdapContainerUtils.LDAP_ADMIN_PASSWORD));
-        assertTrue(authenticator.authenticateByDn(LdapContainerUtils.EXISTING_RDN + "," + LdapContainerUtils.LDAP_BASE_DN, LdapContainerUtils.EXISTING_USER_PASSWORD));
+        assertTrue(authenticator.authenticateByDn(EmbeddedLdapUtils.LDAP_ADMIN_DN, EmbeddedLdapUtils.LDAP_ADMIN_PASSWORD));
+        assertTrue(authenticator.authenticateByDn(EmbeddedLdapUtils.EXISTING_RDN + "," + EmbeddedLdapUtils.LDAP_BASE_DN, EmbeddedLdapUtils.EXISTING_USER_PASSWORD));
     }
 
     @Test
     public void shouldAcceptValidUsernameAndPassword() {
         final LdapUsernamePasswordAuthenticator authenticator = getAuthenticator();
-        assertTrue(authenticator.authenticate(LdapContainerUtils.EXISTING_USERNAME, LdapContainerUtils.EXISTING_USER_PASSWORD));
+        assertTrue(authenticator.authenticate(EmbeddedLdapUtils.EXISTING_USERNAME, EmbeddedLdapUtils.EXISTING_USER_PASSWORD));
     }
 
     @Test
     public void shouldDenyEmptyUserDnOrPassword() {
         final LdapUsernamePasswordAuthenticator authenticator = getAuthenticator();
-        assertFalse(authenticator.authenticateByDn(LdapContainerUtils.LDAP_ADMIN_DN, null));
-        assertFalse(authenticator.authenticateByDn(LdapContainerUtils.LDAP_ADMIN_DN, "".toCharArray()));
-        assertFalse(authenticator.authenticateByDn(null, LdapContainerUtils.LDAP_ADMIN_PASSWORD));
-        assertFalse(authenticator.authenticateByDn("", LdapContainerUtils.LDAP_ADMIN_PASSWORD));
+        assertFalse(authenticator.authenticateByDn(EmbeddedLdapUtils.LDAP_ADMIN_DN, null));
+        assertFalse(authenticator.authenticateByDn(EmbeddedLdapUtils.LDAP_ADMIN_DN, "".toCharArray()));
+        assertFalse(authenticator.authenticateByDn(null, EmbeddedLdapUtils.LDAP_ADMIN_PASSWORD));
+        assertFalse(authenticator.authenticateByDn("", EmbeddedLdapUtils.LDAP_ADMIN_PASSWORD));
         assertFalse(authenticator.authenticateByDn(null, null));
         assertFalse(authenticator.authenticateByDn("", "".toCharArray()));
     }
 
     private LdapUsernamePasswordAuthenticator getAuthenticator() {
-        return new LdapUsernamePasswordAuthenticator(LdapContainerUtils.getLdapConnectionSpec(LDAP_CONTAINER), LdapContainerUtils.USERNAME_TO_DN_FORMAT);
+        return new LdapUsernamePasswordAuthenticator(EmbeddedLdapUtils.getLdapConnectionSpec(LDAP_RULE), EmbeddedLdapUtils.USERNAME_TO_DN_FORMAT);
     }
 
 }

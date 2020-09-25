@@ -1,10 +1,26 @@
 version: 1
-dn: ou=People,{{ LDAP_BASE_DN }}
+dn: dc=example,dc=com
+dc: example
+objectClass: top
+objectClass: dcObject
+
+dn: cn=admin,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: admin
+uid: admin
+sn: admin
+description: Admin User
+userPassword: admin
+
+dn: ou=People,dc=example,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: People
 
-dn: cn=testuser,ou=People,{{ LDAP_BASE_DN }}
+dn: cn=testuser,ou=People,dc=example,dc=com
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
@@ -13,5 +29,5 @@ cn: testuser
 uid: testuser
 sn: testuser
 description: Test User
-userPassword: {SSHA}Vv7mSEzM74BvtLiErS7RzF/vsSWPpGzB
+userPassword: secret
 
