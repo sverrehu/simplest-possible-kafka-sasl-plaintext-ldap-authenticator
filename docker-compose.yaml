@@ -63,3 +63,26 @@ services:
       KAFKA_AUTHN_LDAP_PORT: 389
       KAFKA_AUTHN_LDAP_BASE_DN: dc=example,dc=com
       KAFKA_AUTHN_LDAP_USERNAME_TO_DN_FORMAT: "cn=%s,ou=People,dc=example,dc=com"
+
+  cmak:
+    image: hlebalbau/kafka-manager:stable
+    hostname: cmak
+    container_name: cmak
+    depends_on:
+      - broker
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: "zookeeper:2181"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    hostname: kafdrop
+    container_name: kafdrop
+    depends_on:
+      - broker
+    ports:
+      - "9001:9001"
+    environment:
+      SERVER_PORT: 9001
+      KAFKA_BROKERCONNECT: "broker:9099"
