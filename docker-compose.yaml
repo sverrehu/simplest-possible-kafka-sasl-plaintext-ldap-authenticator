@@ -14,7 +14,7 @@ services:
       LDAP_BASE_DN: "dc=example,dc=com"
       LDAP_TLS_VERIFY_CLIENT: try
     volumes:
-      - ./src/test/resources/ldap/bootstrap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/50-bootstrap.ldif:ro
+      - ./src/test/resources/ldap/bootstrap-openldap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/50-bootstrap.ldif:ro
     command: "--copy-service --loglevel debug"
 
   zookeeper:
