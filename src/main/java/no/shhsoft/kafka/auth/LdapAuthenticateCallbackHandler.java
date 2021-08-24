@@ -46,7 +46,7 @@ implements AuthenticateCallbackHandler {
     }
 
     @Override
-    public void configure(final Map<String, ?> configs, String saslMechanism, List<AppConfigurationEntry> jaasConfigEntries) {
+    public void configure(final Map<String, ?> configs, final String saslMechanism, List<AppConfigurationEntry> jaasConfigEntries) {
         if (!SASL_PLAIN.equals(saslMechanism)) {
             throw new IllegalArgumentException("Only SASL mechanism \"" + SASL_PLAIN + "\" is supported.");
         }
