@@ -18,7 +18,7 @@ services:
     command: "--copy-service --loglevel debug"
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.5.1
+    image: confluentinc/cp-zookeeper:5.5.12
     hostname: zookeeper
     container_name: zookeeper
     ports:
